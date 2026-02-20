@@ -40,7 +40,6 @@ export const TicketsStore = signalStore({ providedIn: 'root' },
             }
         },
         async updateTicketStatus(id: string, status: Status): Promise<Ticket | undefined> {
-            console.log('Updating ticket status in store...', id, status);
             patchState(store, { loading: true, error: null });
             try {
                 const updatedTicket = await apiUpdateTicketStatus(id, status);
