@@ -39,18 +39,16 @@ export const TicketsStore = signalStore({ providedIn: 'root' },
                 patchState(store, { loading: false });
             }
         },
-        async updateTicketStatus(id: string, status: Status): Promise<Ticket | undefined> {
+        async updateTicketStatus(id: string, status: Status) {
             patchState(store, { loading: true, error: null });
             try {
                 const updatedTicket = await apiUpdateTicketStatus(id, status);
                 if (updatedTicket) {
                     patchState(store, { tickets: store.tickets().map(t => t.id === id ? updatedTicket : t), currentTicket: updatedTicket });
                 }
-                return updatedTicket;
-            } catch (error) {
+                } catch (error) {
                 patchState(store, { error: 'Failed to update ticket status' });
-                return undefined;
-            } finally {
+                } finally {
                 patchState(store, { loading: false });
             }
         },
