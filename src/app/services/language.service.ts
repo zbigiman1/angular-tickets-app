@@ -10,10 +10,8 @@ export class LanguageService implements OnDestroy {
   private langSub?: Subscription;
 
   constructor(private translate: TranslateService) {
-    // register supported languages with ngx-translate
     this.translate.addLangs(this.supportedLangs);
 
-    // keep the BehaviorSubject in sync with TranslateService
     this.langSub = this.translate.onLangChange.subscribe((e: LangChangeEvent) => {
       this.currentLang$.next(e.lang);
       try {

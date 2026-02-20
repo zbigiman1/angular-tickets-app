@@ -1,4 +1,6 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { ErrorMessage } from './error-message';
 
@@ -8,7 +10,7 @@ describe('ErrorMessage', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ErrorMessage]
+      imports: [ErrorMessage, HttpClientTestingModule, TranslateModule.forRoot()]
     })
     .compileComponents();
 
