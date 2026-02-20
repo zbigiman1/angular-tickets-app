@@ -1,12 +1,15 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { LanguageService } from '@/services/language.service';
+import { Component, Inject } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+import { Layout } from "./layout/layout/layout";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [Layout],
   templateUrl: './app.html',
-  styleUrl: './app.scss'
 })
 export class App {
-  protected readonly title = signal('angular-tickets-app');
+  constructor(private translate: TranslateService, @Inject(LanguageService) private languageService: LanguageService) {
+    this.languageService.init();
+  }
 }
