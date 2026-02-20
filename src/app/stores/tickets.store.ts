@@ -29,6 +29,7 @@ export const TicketsStore = signalStore({ providedIn: 'root' },
             }
         },
         async getTicketById(id: string) {
+            if (store.currentTicket()?.id === id) return;
             patchState(store, { loading: true, error: null, currentTicket: null });
             try {
                 const ticket = await apiGetTickedById(id);
