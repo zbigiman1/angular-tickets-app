@@ -1,6 +1,6 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
+import { provideRouter } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { TicketDetails } from './ticket-details';
@@ -11,7 +11,8 @@ describe('TicketDetails', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-  imports: [TicketDetails, HttpClientTestingModule, TranslateModule.forRoot(), RouterTestingModule]
+  imports: [TicketDetails, TranslateModule.forRoot()],
+  providers: [provideHttpClientTesting(), provideRouter([] as any)]
     })
     .compileComponents();
 

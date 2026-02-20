@@ -1,4 +1,4 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { TranslateModule } from '@ngx-translate/core';
 import { App } from './app';
@@ -6,7 +6,8 @@ import { App } from './app';
 describe('App', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [App, HttpClientTestingModule, TranslateModule.forRoot()],
+      imports: [App, TranslateModule.forRoot()],
+      providers: [provideHttpClientTesting()],
     }).compileComponents();
   });
 
