@@ -10,10 +10,9 @@ describe('Layout', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-  imports: [Layout, TranslateModule.forRoot()],
-  providers: [provideHttpClientTesting()]
-    })
-    .compileComponents();
+      imports: [Layout, TranslateModule.forRoot()],
+      providers: [provideHttpClientTesting()],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(Layout);
     component = fixture.componentInstance;

@@ -27,9 +27,11 @@ describe('Header', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [Header, TranslateModule.forRoot()],
-      providers: [provideHttpClientTesting(), { provide: LanguageService, useClass: MockLanguageService }]
-    })
-    .compileComponents();
+      providers: [
+        provideHttpClientTesting(),
+        { provide: LanguageService, useClass: MockLanguageService },
+      ],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(Header);
     component = fixture.componentInstance;
@@ -43,15 +45,19 @@ describe('Header', () => {
   });
 
   it('calls languageService.setLanguage when switchLang is called', () => {
-  const calls: string[] = [];
-  (mockLang as any).setLanguage = (lang: string) => { calls.push(lang); };
-  component.switchLang('pl');
-  expect(calls).toEqual(['pl']);
+    const calls: string[] = [];
+    (mockLang as any).setLanguage = (lang: string) => {
+      calls.push(lang);
+    };
+    component.switchLang('pl');
+    expect(calls).toEqual(['pl']);
   });
 
   it('updates the active button when language changes', async () => {
     // initial should be EN
-    const buttons: HTMLElement[] = Array.from(fixture.nativeElement.querySelectorAll('.locale-switcher button'));
+    const buttons: HTMLElement[] = Array.from(
+      fixture.nativeElement.querySelectorAll('.locale-switcher button'),
+    );
     expect(buttons[0].textContent!.trim()).toBe('EN');
 
     // simulate user clicking the PL button

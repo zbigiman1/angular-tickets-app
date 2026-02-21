@@ -8,19 +8,43 @@ import { TicketsStore } from '@/app/stores/tickets.store';
 import { TicketDetails } from './ticket-details';
 
 class MockTicketsStore {
-  private _ticket = { id: '1', customerName: 'C1', subject: 'S1', description: 'D1', priority: 'low', status: 'new', createdAt: new Date().toISOString() } as any;
-  tickets() { return [this._ticket]; }
-  async getTicketById(id: string) { /* noop */ }
-  currentTicket() { return this._ticket; }
-  loading() { return false; }
-  error() { return null; }
-  async updateTicketStatus(id: string, status: string) { this._ticket.status = status; }
+  private _ticket = {
+    id: '1',
+    customerName: 'C1',
+    subject: 'S1',
+    description: 'D1',
+    priority: 'low',
+    status: 'new',
+    createdAt: new Date().toISOString(),
+  } as any;
+  tickets() {
+    return [this._ticket];
+  }
+  async getTicketById(id: string) {
+    /* noop */
+  }
+  currentTicket() {
+    return this._ticket;
+  }
+  loading() {
+    return false;
+  }
+  error() {
+    return null;
+  }
+  async updateTicketStatus(id: string, status: string) {
+    this._ticket.status = status;
+  }
 }
 
 class MockLanguageService {
   private lang = 'en';
-  getCurrentLang() { return this.lang; }
-  currentLangChanges() { return { subscribe: (fn: any) => ({ unsubscribe() { } }) } as any; }
+  getCurrentLang() {
+    return this.lang;
+  }
+  currentLangChanges() {
+    return { subscribe: (fn: any) => ({ unsubscribe() {} }) } as any;
+  }
 }
 
 describe('TicketDetails', () => {
@@ -31,9 +55,13 @@ describe('TicketDetails', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [TicketDetails, TranslateModule.forRoot()],
-      providers: [provideHttpClientTesting(), provideRouter([] as any), { provide: TicketsStore, useClass: MockTicketsStore }, { provide: LanguageService, useClass: MockLanguageService }]
-    })
-      .compileComponents();
+      providers: [
+        provideHttpClientTesting(),
+        provideRouter([] as any),
+        { provide: TicketsStore, useClass: MockTicketsStore },
+        { provide: LanguageService, useClass: MockLanguageService },
+      ],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(TicketDetails);
     component = fixture.componentInstance;
@@ -66,7 +94,10 @@ describe('TicketDetails', () => {
     component.id = '1';
     (component as any).status.set('closed');
     const calls: any[] = [];
-    (mockStore as any).updateTicketStatus = (id: string, status: string) => { calls.push([id, status]); return Promise.resolve(); };
+    (mockStore as any).updateTicketStatus = (id: string, status: string) => {
+      calls.push([id, status]);
+      return Promise.resolve();
+    };
     await component.handleUpdateTicketStatus();
     expect(calls).toEqual([['1', 'closed']]);
   });

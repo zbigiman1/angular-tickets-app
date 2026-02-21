@@ -11,9 +11,8 @@ describe('Footer', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [Footer, TranslateModule.forRoot()],
-      providers: [provideHttpClientTesting()]
-    })
-    .compileComponents();
+      providers: [provideHttpClientTesting()],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(Footer);
     component = fixture.componentInstance;

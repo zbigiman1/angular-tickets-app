@@ -1,48 +1,75 @@
 @if (store.loading()) {
-<app-loader></app-loader>
-}
+  <app-loader></app-loader>
 
-@else if (store.error()) {
-<app-error-message [message]="store.error()"></app-error-message>
-}
+} @else if (store.error()) {
+  <app-error-message [message]="store.error()"></app-error-message>
 
-@else {
-<div class="ticket-details">
+} @else {
+  <div class="ticket-details">
     <header class="ticket-details-header">
-        <nav>
-            <a routerLink="/">
-                <span class="back-to-list-chevron">&#x3c;&#x3c;</span>
-                <span class="back-to-list-text">{{ 'ticketsList' | translate }}</span>
-            </a>
-        </nav>
-        <div class="ticket-status-dropdown">
-            <div class="select-wrapper collapse-on-mobile">
-                <label for="status-select" class="select-label">{{ 'updateTicketStatus' | translate }}:</label>
-                <select [value]="status()" name="status-select" class="select" (change)="handleStatusChange($event)">
-                    <option value="new">{{ 'new' | translate }}</option>
-                    <option value="in_progress">{{ 'in_progress' | translate }}</option>
-                    <option value="closed">{{ 'closed' | translate }}</option>
-                </select>
-            </div>
-            <button class="btn primary" (click)="handleUpdateTicketStatus()">{{ 'update' | translate }}</button>
+      <nav>
+        <a routerLink="/">
+          <span class="back-to-list-chevron">&#x3c;&#x3c;</span>
+          <span class="back-to-list-text">{{ 'ticketsList' | translate }}</span>
+        </a>
+      </nav>
+      <div class="ticket-status-dropdown">
+        <div class="select-wrapper collapse-on-mobile">
+          <label for="status-select" class="select-label"
+            >{{ 'updateTicketStatus' | translate }}:</label
+          >
+          <select
+            [value]="status()"
+            name="status-select"
+            class="select"
+            (change)="handleStatusChange($event)"
+          >
+            <option value="new">{{ 'new' | translate }}</option>
+            <option value="in_progress">{{ 'in_progress' | translate }}</option>
+            <option value="closed">{{ 'closed' | translate }}</option>
+          </select>
         </div>
+        <button class="btn primary" (click)="handleUpdateTicketStatus()">
+          {{ 'update' | translate }}
+        </button>
+      </div>
     </header>
     <ul class="ticket-details-list">
-        <li><strong>{{ 'id' | translate }}</strong>: {{ store.currentTicket()?.id }}</li>
-        <li><strong>{{ 'customerName' | translate }}</strong>: {{ store.currentTicket()?.customerName }}</li>
-        <li><strong>{{ 'subject' | translate }}</strong>: {{ store.currentTicket()?.subject }}</li>
-        <li><strong>{{ 'status' | translate }}</strong>:
-            <span class="badge" [class]="store.currentTicket()?.status">{{ store.currentTicket()?.status | translate }}</span>
-        </li>
-        <li><strong>{{ 'priority' | translate }}</strong>: {{ 'priority' | translate: { value:
-            store.currentTicket()?.priority } }}</li>
-        <li><strong>{{ 'createdAt' | translate }}</strong>: {{ formatDate(store.currentTicket()?.createdAt) }}</li>
+      <li>
+        <strong>{{ 'id' | translate }}</strong
+        >: {{ store.currentTicket()?.id }}
+      </li>
+      <li>
+        <strong>{{ 'customerName' | translate }}</strong
+        >: {{ store.currentTicket()?.customerName }}
+      </li>
+      <li>
+        <strong>{{ 'subject' | translate }}</strong
+        >: {{ store.currentTicket()?.subject }}
+      </li>
+      <li>
+        <strong>{{ 'status' | translate }}</strong
+        >:
+        <span class="badge" [class]="store.currentTicket()?.status">{{
+          store.currentTicket()?.status | translate
+        }}</span>
+      </li>
+      <li>
+        <strong>{{ 'priority' | translate }}</strong
+        >: {{ 'priority' | translate: { value: store.currentTicket()?.priority } }}
+      </li>
+      <li>
+        <strong>{{ 'createdAt' | translate }}</strong
+        >: {{ formatDate(store.currentTicket()?.createdAt) }}
+      </li>
     </ul>
     <div class="ticket-description">
-        <p><strong>{{ 'description' | translate }}:</strong></p>
-        <p>
-            {{ store.currentTicket()?.description }}
-        </p>
+      <p>
+        <strong>{{ 'description' | translate }}:</strong>
+      </p>
+      <p>
+        {{ store.currentTicket()?.description }}
+      </p>
     </div>
-</div>
+  </div>
 }

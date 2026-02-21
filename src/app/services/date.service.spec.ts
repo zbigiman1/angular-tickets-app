@@ -5,16 +5,24 @@ import { DateService } from './date.service';
 
 class MockLanguageService {
   private subj = new BehaviorSubject<string>('en');
-  getCurrentLang() { return this.subj.value; }
-  currentLangChanges() { return this.subj.asObservable(); }
-  setLang(l: string) { this.subj.next(l); }
+  getCurrentLang() {
+    return this.subj.value;
+  }
+  currentLangChanges() {
+    return this.subj.asObservable();
+  }
+  setLang(l: string) {
+    this.subj.next(l);
+  }
 }
 
 describe('DateService', () => {
   let service: DateService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({ providers: [DateService, { provide: LanguageService, useClass: MockLanguageService }] });
+    TestBed.configureTestingModule({
+      providers: [DateService, { provide: LanguageService, useClass: MockLanguageService }],
+    });
   });
 
   it('formats date for en locale', () => {

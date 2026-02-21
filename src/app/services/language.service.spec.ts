@@ -9,9 +9,15 @@ class MockTranslateService {
   lastUsed: string | null = null;
   browserLang: string | null = 'en';
 
-  addLangs(langs: string[]) { this.addedLangs = langs; }
-  use(lang: string) { this.lastUsed = lang; }
-  getBrowserLang() { return this.browserLang; }
+  addLangs(langs: string[]) {
+    this.addedLangs = langs;
+  }
+  use(lang: string) {
+    this.lastUsed = lang;
+  }
+  getBrowserLang() {
+    return this.browserLang;
+  }
 }
 
 describe('LanguageService', () => {
@@ -20,13 +26,12 @@ describe('LanguageService', () => {
 
   beforeEach(() => {
     // make sure no lingering value in localStorage
-    try { localStorage.removeItem('lang'); } catch {}
+    try {
+      localStorage.removeItem('lang');
+    } catch {}
 
     TestBed.configureTestingModule({
-      providers: [
-        LanguageService,
-        { provide: TranslateService, useClass: MockTranslateService }
-      ]
+      providers: [LanguageService, { provide: TranslateService, useClass: MockTranslateService }],
     });
 
     translate = TestBed.inject(TranslateService) as unknown as MockTranslateService;
@@ -34,7 +39,9 @@ describe('LanguageService', () => {
   });
 
   afterEach(() => {
-    try { localStorage.removeItem('lang'); } catch {}
+    try {
+      localStorage.removeItem('lang');
+    } catch {}
   });
 
   it('reads stored lang on init when present', () => {

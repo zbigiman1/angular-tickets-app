@@ -1,43 +1,58 @@
 @if (store.loading()) {
-<app-loader></app-loader>
-}
+  <app-loader></app-loader>
 
-@else if (store.error()) {
-<app-error-message [message]="store.error()"></app-error-message>
-}
+} @else if (store.error()) {
+  <app-error-message [message]="store.error()"></app-error-message>
 
-@else {
-<div class="tickets-filter">
+} @else {
+  <div class="tickets-filter">
     <div class="select-wrapper">
-        <label for="status-select" class="select-label">{{ 'filterByStatus' | translate }}:</label>
-        <select [value]="filter()" name="status-select" class="select" (change)="handleFilterChange($event)">
-            <option value="new">{{ 'new' | translate }}</option>
-            <option value="in_progress">{{ 'in_progress' | translate }}</option>
-            <option value="closed">{{ 'closed' | translate }}</option>
-            <option value="all">{{ 'all' | translate }}</option>
-        </select>
+      <label for="status-select" class="select-label">{{ 'filterByStatus' | translate }}:</label>
+      <select
+        [value]="filter()"
+        name="status-select"
+        class="select"
+        (change)="handleFilterChange($event)"
+      >
+        <option value="new">{{ 'new' | translate }}</option>
+        <option value="in_progress">{{ 'in_progress' | translate }}</option>
+        <option value="closed">{{ 'closed' | translate }}</option>
+        <option value="all">{{ 'all' | translate }}</option>
+      </select>
     </div>
-</div>
-<table class="tickets-table">
+  </div>
+  <table class="tickets-table">
     <thead>
-        <tr>
-            <th><strong>{{ 'id' | translate }}</strong></th>
-            <th><strong>{{ 'customerName' | translate }}</strong></th>
-            <th><strong>{{ 'subject' | translate }}</strong></th>
-            <th><strong>{{ 'status' | translate }}</strong></th>
-            <th><strong>{{ 'priority' | translate }}</strong></th>
-        </tr>
+      <tr>
+        <th>
+          <strong>{{ 'id' | translate }}</strong>
+        </th>
+        <th>
+          <strong>{{ 'customerName' | translate }}</strong>
+        </th>
+        <th>
+          <strong>{{ 'subject' | translate }}</strong>
+        </th>
+        <th>
+          <strong>{{ 'status' | translate }}</strong>
+        </th>
+        <th>
+          <strong>{{ 'priority' | translate }}</strong>
+        </th>
+      </tr>
     </thead>
     <tbody>
-        @for (ticket of filteredTickets(); track ticket.id) {
+      @for (ticket of filteredTickets(); track ticket.id) {
         <tr class="ticket-row" (click)="handleRowClick(ticket.id)">
-            <td>{{ ticket.id }}</td>
-            <td>{{ ticket.customerName }}</td>
-            <td>{{ ticket.subject }}</td>
-            <td><span class="badge" [class]="ticket.status">{{ ticket.status | translate }}</span></td>
-            <td>{{ ticket.priority | translate }}</td>
+          <td>{{ ticket.id }}</td>
+          <td>{{ ticket.customerName }}</td>
+          <td>{{ ticket.subject }}</td>
+          <td>
+            <span class="badge" [class]="ticket.status">{{ ticket.status | translate }}</span>
+          </td>
+          <td>{{ ticket.priority | translate }}</td>
         </tr>
-        }
+      }
     </tbody>
-</table>
+  </table>
 }

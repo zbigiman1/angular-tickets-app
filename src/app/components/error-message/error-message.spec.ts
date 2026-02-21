@@ -10,10 +10,9 @@ describe('ErrorMessage', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-  imports: [ErrorMessage, TranslateModule.forRoot()],
-  providers: [provideHttpClientTesting()]
-    })
-    .compileComponents();
+      imports: [ErrorMessage, TranslateModule.forRoot()],
+      providers: [provideHttpClientTesting()],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(ErrorMessage);
     component = fixture.componentInstance;

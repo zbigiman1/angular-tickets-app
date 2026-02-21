@@ -2,8 +2,12 @@
   <div class="header-content">
     <h1>{{ 'title' | translate }}</h1>
     <div class="locale-switcher">
-      <button type="button" (click)="switchLang('en')" [class.active]="currentLang === 'en'">EN</button>
-      <button type="button" (click)="switchLang('pl')" [class.active]="currentLang === 'pl'">PL</button>
+      <button type="button" (click)="switchLang('en')" [class.active]="currentLang === 'en'">
+        EN
+      </button>
+      <button type="button" (click)="switchLang('pl')" [class.active]="currentLang === 'pl'">
+        PL
+      </button>
     </div>
   </div>
 </header>

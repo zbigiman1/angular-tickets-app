@@ -1,9 +1,8 @@
-@use "variables";
+@use 'variables';
 
 .container {
-    max-width: variables.$page-max-width;
-    min-height: variables.$page-content-min-height;
-    margin: 0 auto;
-    padding: variables.$spacing variables.$spacing * 2;
+  max-width: variables.$page-max-width;
+  min-height: variables.$page-content-min-height;
+  margin: 0 auto;
+  padding: variables.$spacing variables.$spacing * 2;
 }
-

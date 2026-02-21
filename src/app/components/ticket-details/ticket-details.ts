@@ -21,7 +21,7 @@ export class TicketDetails {
   status = signal<Status | null>(null);
 
   constructor(private dateService: DateService) {
-    this.route.paramMap.subscribe(params => {
+    this.route.paramMap.subscribe((params) => {
       this.id = params.get('id');
     });
   }
