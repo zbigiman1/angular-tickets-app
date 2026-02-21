@@ -23,7 +23,11 @@ export class TicketsList implements OnInit {
     const selectElement = event.target as HTMLSelectElement;
     const status = selectElement.value;
     this.filter.set(status as Status | 'all');
-    this.filteredTickets.set(this.store.filterTicketsByStatus(status as any));
+    if (status === 'all') {
+      this.filteredTickets.set(this.store.tickets());
+      return;
+    }
+    this.filteredTickets.set(this.store.filterTicketsByStatus(status as Status));
   }
 
   handleRowClick(ticketId: string) {

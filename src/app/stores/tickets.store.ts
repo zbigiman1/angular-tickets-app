@@ -47,16 +47,13 @@ export const TicketsStore = signalStore({ providedIn: 'root' },
                 if (updatedTicket) {
                     patchState(store, { tickets: store.tickets().map(t => t.id === id ? updatedTicket : t), currentTicket: updatedTicket });
                 }
-                } catch (error) {
+            } catch (error) {
                 patchState(store, { error: 'Failed to update ticket status' });
-                } finally {
+            } finally {
                 patchState(store, { loading: false });
             }
         },
-        filterTicketsByStatus(status: Status | 'all') {
-            if (status === 'all') {
-                return store.tickets();
-            }
+        filterTicketsByStatus(status: Status) {
             return store.tickets().filter(ticket => ticket.status === status);
         }
     }))
