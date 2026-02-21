@@ -52,7 +52,6 @@ describe('TicketDetails', () => {
   });
 
   it('formatDate uses en-US for en locale', () => {
-    component.currentLang = 'en';
     const formatted = component.formatDate('2020-01-01T12:00:00Z');
     expect(formatted).toContain('2020');
   });

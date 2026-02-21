@@ -1,4 +1,6 @@
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { Footer } from './footer';
 
@@ -8,7 +10,8 @@ describe('Footer', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Footer]
+      imports: [Footer, TranslateModule.forRoot()],
+      providers: [provideHttpClientTesting()]
     })
     .compileComponents();
 
