@@ -16,11 +16,12 @@ import { TranslateModule } from '@ngx-translate/core';
 })
 export class TicketDetails {
   private route = inject(ActivatedRoute);
+  private dateService = inject(DateService);
   id: string | null = null;
   store = inject(TicketsStore);
   status = signal<Status | null>(null);
 
-  constructor(private dateService: DateService) {
+  constructor() {
     this.route.paramMap.subscribe((params) => {
       this.id = params.get('id');
     });

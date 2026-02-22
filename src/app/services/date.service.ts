@@ -1,11 +1,12 @@
 import { LanguageService } from '@/app/services/language.service';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 
 @Injectable({ providedIn: 'root' })
 export class DateService {
   private currentLang = 'pl';
+  private languageService = inject(LanguageService);
 
-  constructor(private languageService: LanguageService) {
+  constructor() {
     const stored = this.languageService.getCurrentLang();
     this.currentLang = stored || 'pl';
     // subscribe to changes so service always has the latest locale

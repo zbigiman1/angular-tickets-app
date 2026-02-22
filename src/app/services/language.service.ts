@@ -1,15 +1,15 @@
-import { Injectable, OnDestroy } from '@angular/core';
+import { inject, Injectable, OnDestroy } from '@angular/core';
 import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
 import { BehaviorSubject, Subscription } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class LanguageService implements OnDestroy {
   readonly supportedLangs = ['en', 'pl'];
-
+  private translate = inject(TranslateService);
   private currentLang$ = new BehaviorSubject<string>('en');
   private langSub?: Subscription;
 
-  constructor(private translate: TranslateService) {
+  constructor() {
     this.translate.addLangs(this.supportedLangs);
 
     this.langSub = this.translate.onLangChange.subscribe((e: LangChangeEvent) => {
