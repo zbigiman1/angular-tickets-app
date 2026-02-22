@@ -1,9 +1,9 @@
 import { ErrorMessage } from '@/app/components/error-message/error-message';
 import { Loader } from '@/app/components/loader/loader';
 import { TicketsStore } from '@/app/stores/tickets.store';
-import { Status, Ticket } from '@/app/types';
+import { Status } from '@/app/types';
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -16,18 +16,20 @@ import { TranslateModule } from '@ngx-translate/core';
 export class TicketsList implements OnInit {
   private router = inject(Router);
   store = inject(TicketsStore);
-  filteredTickets = signal<Ticket[]>([]);
   filter = signal<Status | 'all'>('all');
+
+  filteredTickets = computed(() => {
+    const status = this.filter();
+    if (status === 'all') {
+      return this.store.tickets();
+    }
+    return this.store.filterTicketsByStatus(status);
+  });
 
   handleFilterChange(event: Event) {
     const selectElement = event.target as HTMLSelectElement;
     const status = selectElement.value;
-    this.filter.set(status as Status | 'all');
-    if (status === 'all') {
-      this.filteredTickets.set(this.store.tickets());
-      return;
-    }
-    this.filteredTickets.set(this.store.filterTicketsByStatus(status as Status));
+    this.filter.set(status as Status | 'all');    
   }
 
   handleRowClick(ticketId: string) {
@@ -36,6 +38,5 @@ export class TicketsList implements OnInit {
 
   async ngOnInit(): Promise<void> {
     await this.store.loadTickets();
-    this.filteredTickets.set(this.store.tickets());
   }
 }
