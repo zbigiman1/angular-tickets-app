@@ -1,4 +1,9 @@
-# AngularTicketsApp
+# Example app with:
+
+- Angular 21
+- ngrx/signals store
+- i18n localization
+- unit tests
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.1.4.
 
